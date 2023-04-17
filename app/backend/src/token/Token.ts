@@ -11,4 +11,14 @@ export default class TokenJWT {
     });
     return token;
   }
+
+  public CheckToken(token: string) {
+    try {
+      const payload = jwt.verify(token, this.secret);
+      return payload as jwt.JwtPayload;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  }
 }

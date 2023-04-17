@@ -14,4 +14,10 @@ export default class UsersController {
     const { type, message } = await this.usersService.getByEmail(email, password);
     return res.status(type).json(message);
   };
+
+  public getRoleUser = async (req: Request, res: Response): Promise<Response | ILogin> => {
+    const token = req.header('Authorization') as string;
+    const { type, message } = UsersService.getUserRoleByToken(token);
+    return res.status(type).json(message);
+  };
 }

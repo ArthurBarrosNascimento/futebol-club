@@ -8,5 +8,5 @@ export interface IUsers {
 
 export interface ILogin {
   type: number;
-  message: { message: string } | { token: string };
+  message: { message: string } | { token: string } | { role: string };
 }

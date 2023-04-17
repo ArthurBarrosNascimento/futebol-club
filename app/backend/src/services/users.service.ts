@@ -19,4 +19,12 @@ export default class UsersService {
     const token = new TokenJWT().tokenGen(user);
     return { type: 200, message: { token } };
   }
+
+  public static getUserRoleByToken(token:string):ILogin {
+    const getToken = new TokenJWT().CheckToken(token);
+    if (!getToken) {
+      return { type: 401, message: { message: 'Token must be a valid token' } };
+    }
+    return { type: 200, message: { role: getToken.data.role } };
+  }
 }

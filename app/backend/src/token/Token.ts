@@ -5,7 +5,7 @@ export default class TokenJWT {
   private secret = process.env.JWT_SECRET || 'jwt_secret';
 
   public tokenGen(user: IUsers): string {
-    const token = jwt.sign(user, this.secret, {
+    const token = jwt.sign({ data: user }, this.secret, {
       expiresIn: '7d',
       algorithm: 'HS256',
     });

@@ -3,7 +3,7 @@ export interface IUsers {
   username: string;
   role: string;
   email: string;
-  pasaword: string;
+  password: string;
 }
 
 export interface ILogin {

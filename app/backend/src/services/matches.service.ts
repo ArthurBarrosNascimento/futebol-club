@@ -15,4 +15,9 @@ export default class MatcheService {
     });
     return allMatches;
   }
+
+  public async finishMatche(id:number) {
+    await this.model.update({ inProgress: false }, { where: { id } });
+    return null;
+  }
 }

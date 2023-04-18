@@ -31,4 +31,15 @@ export default class MatchesController {
       console.log(error);
     }
   };
+
+  public updateScoreById = async (req: Request, res: Response):Promise<Response | void> => {
+    try {
+      const { id } = req.params;
+      const { homeTeamGoals, awayTeamGoals } = req.body;
+      await this.matcheService.updateScore(Number(id), homeTeamGoals, awayTeamGoals);
+      return res.status(200).json('');
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }

@@ -15,4 +15,11 @@ routerMatcher.patch(
   matcheController.finishMatche,
 );
 
+routerMatcher.patch(
+  '/:id',
+  validateToken.validateToken,
+  validateToken.checkToken,
+  matcheController.updateScoreById,
+);
+
 export default routerMatcher;

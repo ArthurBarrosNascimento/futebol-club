@@ -20,4 +20,9 @@ export default class MatcheService {
     await this.model.update({ inProgress: false }, { where: { id } });
     return null;
   }
+
+  public async updateScore(id: number, hTG: number, aTG: number) {
+    await this.model.update({ homeTeamGoals: hTG, awayTeamGoals: aTG }, { where: { id } });
+    return null;
+  }
 }

@@ -45,7 +45,11 @@ export default class MatchesController {
 
   public createNewMatche = async (req: Request, res: Response):Promise<Response | void> => {
     const payload = req.body;
-    const newMatche = await this.matcheService.createNewMatche(payload);
-    return res.status(201).json(newMatche);
+    if (payload.homeTeamId === payload.awayTeamId) {
+      return res.status(422)
+        .json({ message: 'It is not possible to create a match with two equal teams' });
+    }
+    const { type, message } = await this.matcheService.createNewMatche(payload);
+    return res.status(type).json({ message });
   };
 }

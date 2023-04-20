@@ -2,6 +2,7 @@ import { ModelStatic } from 'sequelize';
 import MatchesModel from '../database/models/matches.model';
 import TeamsModel from '../database/models/teams.model';
 import IMatche from '../interfaces/matches.interface';
+import TeamsService from './teams.service';
 
 export default class MatcheService {
   private model: ModelStatic<MatchesModel> = MatchesModel;
@@ -27,6 +28,18 @@ export default class MatcheService {
   }
 
   public async createNewMatche(payload: IMatche) {
+    const teamService = new TeamsService();
+
+    const teamOne = await teamService.getById(payload.homeTeamId);
+    console.log(teamOne);
+
+    const teamTwo = await teamService.getById(payload.awayTeamId);
+    console.log(teamTwo);
+
+    if (!teamOne || !teamTwo) {
+      return { type: 404, message: 'There is no team with such id!' };
+    }
+
     const { dataValues } = await this.model.create({
       homeTeamId: payload.homeTeamId,
       homeTeamGoals: payload.homeTeamGoals,
@@ -34,6 +47,6 @@ export default class MatcheService {
       awayTeamGoals: payload.awayTeamGoals,
       inProgress: true,
     });
-    return dataValues;
+    return { type: 201, message: dataValues };
   }
 }

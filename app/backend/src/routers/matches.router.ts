@@ -22,4 +22,11 @@ routerMatcher.patch(
   matcheController.updateScoreById,
 );
 
+routerMatcher.post(
+  '/',
+  validateToken.validateToken,
+  validateToken.checkToken,
+  matcheController.createNewMatche,
+);
+
 export default routerMatcher;

@@ -42,4 +42,10 @@ export default class MatchesController {
       console.log(error);
     }
   };
+
+  public createNewMatche = async (req: Request, res: Response):Promise<Response | void> => {
+    const payload = req.body;
+    const newMatche = await this.matcheService.createNewMatche(payload);
+    return res.status(201).json(newMatche);
+  };
 }

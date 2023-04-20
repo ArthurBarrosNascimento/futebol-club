@@ -25,4 +25,15 @@ export default class MatcheService {
     await this.model.update({ homeTeamGoals: hTG, awayTeamGoals: aTG }, { where: { id } });
     return null;
   }
+
+  public async createNewMatche(payload: IMatche) {
+    const { dataValues } = await this.model.create({
+      homeTeamId: payload.homeTeamId,
+      homeTeamGoals: payload.homeTeamGoals,
+      awayTeamId: payload.awayTeamId,
+      awayTeamGoals: payload.awayTeamGoals,
+      inProgress: true,
+    });
+    return dataValues;
+  }
 }

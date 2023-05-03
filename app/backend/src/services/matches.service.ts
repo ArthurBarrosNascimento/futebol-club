@@ -49,4 +49,15 @@ export default class MatcheService {
     });
     return { type: 201, message: dataValues };
   }
+
+  public async getAllMatchesFinished(): Promise<IMatche[]> {
+    const allMatches = this.model.findAll({
+      where: { inProgress: false },
+      include: [
+        { model: TeamsModel, as: 'homeTeam', attributes: ['teamName'] },
+        { model: TeamsModel, as: 'awayTeam', attributes: ['teamName'] },
+      ],
+    });
+    return allMatches;
+  }
 }

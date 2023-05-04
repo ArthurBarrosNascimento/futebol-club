@@ -50,6 +50,6 @@ export default class MatchesController {
         .json({ message: 'It is not possible to create a match with two equal teams' });
     }
     const { type, message } = await this.matcheService.createNewMatche(payload);
-    return res.status(type).json({ message });
+    return res.status(type).json(message);
   };
 }

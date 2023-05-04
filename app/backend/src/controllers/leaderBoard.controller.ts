@@ -8,8 +8,13 @@ export default class LeaderBoardController {
     this.service = service;
   }
 
-  public getAll = async (_req: Request, res: Response): Promise<Response | void> => {
-    const result = await this.service.showAll();
+  public getHome = async (_req: Request, res: Response): Promise<Response | void> => {
+    const result = await this.service.getHomeTeams();
+    return res.status(200).json(result);
+  };
+
+  public getAway = async (_req: Request, res: Response): Promise<Response | void> => {
+    const result = await this.service.getAwayTeams();
     return res.status(200).json(result);
   };
 }

@@ -12,6 +12,7 @@ export default class TeamsService {
 
   public async getById(id: number): Promise<ITeams | unknown > {
     const team = await this.model.findOne({ where: { id } });
+    if (!team) throw new Error('This team doesn`t exists');
     return team;
   }
 }

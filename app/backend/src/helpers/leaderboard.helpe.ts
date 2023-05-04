@@ -139,3 +139,22 @@ export const sortTeams = (teams: ILeaderBoard[]) => teams.sort((timeA, timeB) =>
   }
   return timeB.goalsFavor - timeA.goalsFavor;
 });
+
+export const SumAll = (home: ILeaderBoard[], away:ILeaderBoard[]) => {
+  const allTeamsHome = home.map((h) => {
+    const awayTeams = away.find((a) => h.name === a.name) as ILeaderBoard;
+    return {
+      name: h.name,
+      totalPoints: h.totalPoints + awayTeams.totalPoints,
+      totalGames: h.totalGames + awayTeams.totalGames,
+      totalVictories: h.totalVictories + awayTeams.totalVictories,
+      totalDraws: h.totalDraws + awayTeams.totalDraws,
+      totalLosses: h.totalLosses + awayTeams.totalLosses,
+      goalsFavor: h.goalsFavor + awayTeams.goalsFavor,
+      goalsOwn: h.goalsOwn + awayTeams.goalsOwn,
+      goalsBalance: h.goalsBalance + awayTeams.goalsBalance,
+      efficiency: 1,
+    };
+  });
+  return allTeamsHome;
+};

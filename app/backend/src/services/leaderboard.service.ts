@@ -6,6 +6,7 @@ import {
   createLeaderBoardStus,
   efficiencyTeams,
   sortTeams,
+  SumAll,
 } from '../helpers/leaderboard.helpe';
 import ITeams from '../interfaces/teams.interface';
 
@@ -43,6 +44,19 @@ export default class LeaderBoardService {
     const awaitAwayTeams = await Promise.all(AwayTeams);
     const sortTeamsAway = sortTeams(awaitAwayTeams);
     return sortTeamsAway;
+  }
+
+  public async leaderBoard() {
+    const home = await this.getHomeTeams();
+    const away = await this.getAwayTeams();
+    const getAllBoard = SumAll(home, away);
+    const getEficiency = getAllBoard.map((all) => {
+      const allget = all;
+      allget.efficiency = efficiencyTeams(all);
+      return allget;
+    });
+    const sortAllTeams = sortTeams(getEficiency);
+    return sortAllTeams;
   }
 }
 
